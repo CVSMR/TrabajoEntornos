@@ -13,7 +13,8 @@ public class EntornosFactorizar {
 	        if (tieneTarjetaFidelidad && saldoTarjeta > 0) {
 	            total -= saldoTarjeta;
 	        }
-
+	        // esto es una prueba
+	        
 	       
 	        total += total * (impuestos / 100);
 
