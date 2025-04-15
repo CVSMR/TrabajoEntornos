@@ -4,7 +4,7 @@ public class EntornosFactorizar {
 	 public double calculaDato(double precioBase, int cantidad, double descuento, double impuestos, boolean tieneTarjetaFidelidad, double saldoTarjeta, boolean esOfertaEspecial, boolean esNavidad, boolean esMiembroVip, String metodoPago, boolean aplicarCuotas, int cuota, boolean esEnvioGratis, double precioEnvio, String tipoProducto, String categoriaProducto, String codigoCupon, Usuario usuario) {
 	        double total = precioBase * cantidad;
 
-	       
+	        // Aplico descuento si existe
 	        if (descuento > 0) {
 	            total -= total * (descuento / 100);
 	        }
@@ -18,6 +18,9 @@ public class EntornosFactorizar {
 	       
 	        total += total * (impuestos / 100);
 
+	        
+	        // OFERTAS
+	        
 	        if (esOfertaEspecial) {
 	            total *= 0.9;
 	        }
@@ -32,6 +35,7 @@ public class EntornosFactorizar {
 	            total *= 0.8;
 	        }
 
+	        // Metodos de pago
 	        
 	        if (metodoPago.equals("TarjetaCredito")) {
 	            total *= 1.05;
@@ -50,7 +54,8 @@ public class EntornosFactorizar {
 	            }
 	        }
 
-
+	        //Envios gratis
+	        
 	        if (!esEnvioGratis) {
 	            total += precioEnvio;
 	        }
@@ -65,7 +70,8 @@ public class EntornosFactorizar {
 	            throw new IllegalArgumentException("El producto no es válido para esta compra.");
 	        }
 
-	      
+	        // Usuario nulo
+	        
 	        if (usuario != null) {
 	            total = aplicarDescuentoPorUsuario(usuario, total);
 	        }
@@ -78,7 +84,8 @@ public class EntornosFactorizar {
 	        return total;
 	    }
 
-	  
+	  	// Cupones descuento
+	 
 	    private double aplicarCuponDescuento(double total, String codigoCupon) {
 	        if (codigoCupon.equals("CUPOFF")) {
 	            total *= 0.8;
@@ -88,7 +95,8 @@ public class EntornosFactorizar {
 	        return total;
 	    }
 
-	   
+	   //Validacion de productos
+	    
 	    private boolean validarProducto(String tipoProducto, String categoriaProducto) {
 	        if (tipoProducto.equals("Electronico") && categoriaProducto.equals("Smartphones")) {
 	            return true;
@@ -100,7 +108,8 @@ public class EntornosFactorizar {
 	        return false;
 	    }
 
-	   
+	   // Aplicacion de descuentos
+	    
 	    private double aplicarDescuentoPorUsuario(Usuario usuario, double total) {
 	        if (usuario.esEmpleado()) {
 	            total *= 0.7; 
